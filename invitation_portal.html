@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eldoria Academy Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Gothic/Magical Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- MYSTICAL GOTHIC THEME --- */
+        
+        :root {
+            --bg-deep: #050505;
+            --bg-card: #110e1b;
+            --border-magical: #5b21b6; /* Deep Violet */
+            --accent-gold: #fde047; /* Bright Gold */
+            --text-main: #e2e8f0; /* Off-White */
+            --text-muted: #94a3b8; /* Gray/Slate */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 50% 0%, #370617 0%, transparent 50%), /* Deep Burgundy Glow */
+                radial-gradient(circle at 0% 50%, #1e1b4b 0%, transparent 40%), /* Deep Blue/Violet */
+                radial-gradient(circle at 100% 50%, #5b21b6 0%, transparent 40%); /* Violet Glow */
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Crimson Pro', serif;
+        }
+
+        h1, h2, h3, h4, .font-gothic {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Magical Card Styling (Dark Glassmorphism) */
+        .invitation-card {
+            background-color: rgba(17, 14, 27, 0.85); /* Dark Glass */
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(139, 92, 246, 0.3); /* Faint Purple Border */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(88, 28, 135, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .invitation-card:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 25px rgba(88, 28, 135, 0.3);
+        }
+
+        /* Text Effects */
+        .text-glow-purple {
+            text-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+        }
+        
+        .header-glow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(253, 224, 71, 0.6); /* Gold Glow */
+            color: var(--accent-gold);
+        }
+
+        /* Button Styling */
+        .copy-button {
+            background-color: var(--border-magical);
+            color: var(--text-main);
+            border: 1px solid var(--accent-gold);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: #6d28d9;
+            box-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
+        }
+
+        /* Input Styles */
+        input[type="text"] {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--text-main);
+            border: 1px solid var(--border-magical);
+        }
+
+        /* Custom style for the list item holding the link (Host Portal) */
+        .link-list-item {
+            background-color: rgba(17, 14, 27, 0.5); /* Semi-transparent dark bg */
+            border: 1px solid rgba(139, 92, 246, 0.2); /* Subtle purple border */
+        }
+        .link-input {
+            background-color: rgba(0, 0, 0, 0.3); /* Transparent background for link text */
+            border-right: none !important;
+        }
+        
+    </style>
+    <!-- Chosen Palette: Mystical Gothic (Deep Violet/Black Base, Gold/Purple Accents) -->
+    <!-- Application Structure Plan: Single-page application using URL hash (#characterId) for personalized content routing. If no hash is present, a Landing Page for the host to copy personalized links is displayed. When a hash is present, the Guest View loads, showing the shared Official Communiqué, the Menu, and the specific character's detailed Profile/Costume Guide. This structure ensures targeted information delivery while using a single source file. -->
+    <!-- Visualization & Content Choices: Content is delivered via standard HTML (styled with Tailwind and custom Gothic CSS) to maintain high readability. Interactive elements include copy-to-clipboard functionality, hash-based filtering. API usage has been removed. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="font-serif leading-relaxed min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- Header -->
+        <header class="text-center pb-6 border-b border-gray-700">
+            <h1 class="text-5xl header-glow tracking-widest font-gothic">The Arcane Academy of Eldoria</h1>
+            <p class="text-lg mt-2 text-glow-purple" style="color: var(--text-muted);">Personalized Induction & Quarantine Notice</p>
+        </header>
+
+        <!-- Dynamic Content Section -->
+        <main id="content-container" class="space-y-10">
+            <!-- Content will be injected here by JavaScript -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center pt-6 text-sm text-gray-500 border-t border-gray-700">
+            &copy; Midwinter Solstice Protocol. Please destroy this communication after reviewing your role.
+        </footer>
+    </div>
+
+    <script>
+        // API dependencies removed
+        
+        const characterData = [
+            {
+                id: 'volkov',
+                name: 'Professor Ignis Volkov',
+                role: 'Master of Potions',
+                background: 'An open critic of Thorne’s forbidden magic. His presence was mandatory to monitor the ritual\'s material stability.',
+                goal: 'Convince everyone that the Grimoire\'s unstable power killed Thorne, thus reinforcing your position as the new, safer Headmaster candidate.',
+                vibe: 'Clinical & Controlling / The Seeming Professional.',
+                checklist: 'Tailored, dark suit, crisp white shirt. Small, discreet academic pin. Carrying an old, leather-bound notebook or a pocket watch.'
+            },
+            {
+                id: 'lira',
+                name: 'Lira "The Shadow" Vane',
+                role: 'The Forbidden Student',
+                background: 'A controversial student caught snooping near the Ossuary. She claims she was fetching a forgotten amulet.',
+                goal: 'Prove your innocence. You need the Academy\'s resources for your crucial, secret research, and cannot afford to be expelled or imprisoned.',
+                vibe: 'Rebel Prodigy / Edgy & Powerful.',
+                checklist: 'Simple black tunic or fitted dress. High-laced boots. Dark, mismatched accessories (layered necklaces, rings). Dark, intense makeup.'
+            },
+            {
+                id: 'kaelan',
+                name: 'Custodian Kaelan',
+                role: 'The Ancient Librarian',
+                background: 'He speaks in riddles and warned Thorne that his ambition would lead to disaster. He was in the adjoining Scriptorium during the ritual.',
+                goal: 'The Academy\'s secrets must remain safe. Distract suspicion away from the deeper, darker histories that Thorne were threatening to expose.',
+                vibe: 'Ascetic Prophecy / Humble & Mystical.',
+                checklist: 'Simple, loose-fitting robes in beige, grey, or brown. A large, gnarled wooden staff (a walking stick).'
+            },
+            {
+                id: 'aurelia',
+                name: 'Lady Aurelia',
+                role: 'The Fae Diplomat',
+                background: 'Her unexpected visit has been marked by several tense, private meetings with Thorne over an undisclosed diplomatic matter. She arrived moments before the ritual began.',
+                goal: 'You must ensure that the delicate negotiations you were conducting with Thorne remain secret. You cannot allow anyone to think the Fae are involved in any political assassination.',
+                vibe: 'Chilling Elegance / Otherworldly Royalty.',
+                checklist: 'Elaborate, flowing dress in silver, ice blue, or deep purple. Faux leaf or vine jewelry. Intense, pale makeup with shimmering accents. Long, dramatic cloak or shawl.'
+            },
+            {
+                id: 'gideon',
+                name: 'Gideon',
+                role: 'The Academy Warden',
+                background: 'He was guarding the Ossuary entrance, making him the prime, but potentially conflicted, witness. He heard a brief, unnatural screech of magic.',
+                goal: 'Discover who broke the magical oath to harm the Headmaster. You must not betray the Geas binding you, but you need to find justice for your master.',
+                vibe: 'Bound Duty / The Soldier-Monk.',
+                checklist: 'Heavy, thick coat or vest (trench coat or utility jacket). Dark, practical pants and boots. A thick leather belt. A set of large, antique-looking keys hanging from your belt.'
+            },
+            {
+                id: 'demos',
+                name: 'Professor Elara Demos',
+                role: 'The Transfiguration Expert',
+                background: 'A recent, controversial addition to the faculty, sponsored by Thorne. She was called upon immediately after the death to stabilize the residual magical energy.',
+                goal: 'You have a secondary goal at the Academy that is far more important than Thorne’s life. Do not let this murder distract you from your true mission, and above all, do not reveal your true nature.',
+                vibe: 'Deceptive Brilliance / Chameleon.',
+                checklist: 'A smart, tailored outfit (skirt suit or fitted gown). An expensive-looking brooch or complicated geometric jewelry. Hair pinned back in a perfect, cold style.'
+            },
+            {
+                id: 'vivianne',
+                name: 'Vivianne Bell',
+                role: 'The Glamorous Leading Lady (8th Player Option)',
+                background: 'She was invited by the Archmage himself to witness the ritual and finalize a major financial contribution to the Academy. She thrives on her powerful social connections.',
+                goal: 'Protect your public image at all costs. You cannot let the truth of your private life, or the source of your wealth, surface.',
+                vibe: 'Gothic Glamour / Seduced by Shadow.',
+                checklist: 'Long, flowing gown in black or deep velvet. Faux fur stole or elegant shawl. Dazzling, but oversized jewelry.'
+            }
+        ];
+
+        const menuData = [
+            { name: "Volkov's Terrestrial Tincture", desc: "A hearty, creamy soup of root vegetables and potato, finished with leeks and savory herbs.", course: "First Incantation (Starter)" },
+            { name: "Lady Aurelia's Court Salad", desc: "Vibrant salad of roasted heirloom beets, goat cheese, and walnuts with a sharp citrus vinaigrette.", course: "The Fae Negotiation (Second Course)" },
+            { name: "Thorne's Obsession: Seared Hunter's Rack", desc: "A richly seasoned seared beef tenderloin (or prime cut) served atop a mash of root vegetables and finished with a dark, juniper-infused reduction sauce.", course: "The Forbidden Binding (Main Course)" },
+            { name: "Obsidian Heart Cheesecake", desc: "Decadent dark chocolate cheesecake with a crumb crust, topped with a spiced raspberry glaze.", course: "The Obsidian Grimoire (Dessert)" }
+        ];
+
+        const communique = `
+            <div class="invitation-card p-6 sm:p-8 rounded-lg space-y-5">
+                <h2 class="text-2xl font-gothic border-b-2 border-gray-700 pb-2 text-red-400">I. OFFICIAL COMMUNIQUÉ: IMMEDIATE QUARANTINE & THE RITUAL DISASTER</h2>
+                <p class="text-sm text-gray-400"><strong>Date:</strong> Midnight, Midwinter Solstice &middot; <strong>Status:</strong> LOCKDOWN &middot; <strong>Location:</strong> The Academy Ossuary</p>
+                
+                <h3 class="text-xl font-gothic mt-4 text-white">The Event: The Binding of the Grimoire</h3>
+                <p class="text-gray-300">
+                    The mandatory <strong>Binding Ritual of the Obsidian Grimoire</strong> was meant to stabilize the forbidden knowledge within. Archmage Thorne, however, attempted an advanced, highly volatile stabilizing sequence, pushing the limits of the ancient containment runes. At the climax of this sequence, witnesses reported a blinding flash of emerald energy and a profound, unnatural magical scream.
+                </p>
+
+                <h3 class="text-xl font-gothic mt-4 text-white">The Crime: Faerie Venom and Calculated Timing</h3>
+                <p class="text-gray-300">
+                    Archmage Thorne was found lifeless, slumped near his ceremonial station. Initial inspection confirmed evidence of a catastrophic magical surge. Crucially, the overturned <strong>Ceremonial Chalice</strong>—which contained his pre-ritual draught—bore traces of **Faerie Venom**. This powerful, unstable toxin is known to be lethal only when activated by a massive influx of raw, unstable magic.
+                </p>
+                
+                <p class="text-base font-medium text-red-400 border-t border-gray-700 pt-3 mt-4">
+                    This confirms a calculated act. Someone among the eight individuals present had the knowledge, the access, and the motive to time this poisoning precisely with the ritual's failure. You are now the pool of Essential Personnel and Suspects.
+                </p>
+            </div>
+        `;
+
+        // --- UI RENDERING LOGIC ---
+
+        function renderLandingPage() {
+            const container = document.getElementById('content-container');
+            container.innerHTML = `
+                <div class="text-center py-10 invitation-card rounded-lg">
+                    <h2 class="text-3xl font-gothic text-red-400">Host Portal: Generate Invitations</h2>
+                    <p class="text-gray-400 mt-2">Copy the personalized URL below for each guest to deliver their role, briefing, and costume guide.</p>
+                </div>
+                <div class="space-y-4">
+                    ${characterData.map(c => `
+                        <div class="flex flex-col sm:flex-row items-center p-4 rounded-lg link-list-item">
+                            <div class="flex-grow text-sm font-bold w-full sm:w-auto mb-2 sm:mb-0">
+                                <span class="text-red-400">${c.name}</span> (<span class="text-gray-500">${c.role}</span>)
+                            </div>
+                            <div class="flex w-full sm:w-auto">
+                                <input type="text" id="link-${c.id}" value="${window.location.origin + window.location.pathname}#${c.id}" readonly class="flex-grow p-2 text-xs link-input rounded-l-md truncate">
+                                <button onclick="copyLink('${c.id}')" class="px-3 py-2 text-xs font-bold copy-button rounded-r-md hover:opacity-90 transition">
+                                    Copy Link
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderRosterSection(currentCharacterId) {
+            const otherSuspects = characterData.filter(c => c.id !== currentCharacterId);
+            
+            return `
+                <div class="invitation-card p-6 sm:p-8 rounded-lg space-y-6 mt-8">
+                    <h2 class="text-2xl font-gothic text-red-400 border-b-2 border-gray-700 pb-2">IV. SUSPECT ROSTER: THE QUARANTINED EIGHT</h2>
+                    <p class="text-gray-400 text-sm">Review the profiles of the other individuals trapped within the Academy. Knowledge of their public motivations and backgrounds is key to the investigation.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${otherSuspects.map(suspect => `
+                            <div class="p-3 rounded-lg border border-purple-800 bg-gray-900/50">
+                                <h4 class="text-lg font-gothic text-white">${suspect.name} (${suspect.role})</h4>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-3">${suspect.background}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGuestPage(character) {
+            const container = document.getElementById('content-container');
+            
+            const profileSection = `
+                <div class="invitation-card p-6 sm:p-8 rounded-lg space-y-6">
+                    <h2 class="text-2xl font-gothic text-red-400 border-b-2 border-gray-700 pb-2">II. YOUR PROFILE: ${character.name}</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-gothic text-white">Role & Background:</h3>
+                            <p class="text-gray-400 mt-1"><strong>Role:</strong> ${character.role}</p>
+                            <p class="text-gray-300 mt-1">${character.background}</p>
+                        </div>
+                        <div class="p-4 rounded-lg border border-purple-600 bg-purple-900/30">
+                            <h3 class="text-xl font-gothic text-yellow-300">Your Public Goal:</h3>
+                            <p class="mt-1 text-gray-200">${character.goal}</p>
+                            <p class="text-xs italic mt-3 text-gray-400">Remember this is what you *publicly* claim to be doing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-4">
+                        <h3 class="text-xl font-gothic text-white">Costume Guide:</h3>
+                        <p class="text-gray-400 mt-1"><strong>Vibe:</strong> ${character.vibe}</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-2 ml-4">
+                            <li>${character.checklist.replace(/\. /g, '</li><li>').replace(/\.$/, '')}</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            const menuSection = `
+                <div class="invitation-card p-6 sm:p-8 rounded-lg">
+                    <h2 class="text-2xl font-gothic text-red-400 border-b-2 border-gray-700 pb-2">III. THE HEADMASTER'S LAST SUPPER: MENU</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        ${menuData.map(item => `
+                            <div class="p-3 bg-gray-900/50 rounded-lg border border-gray-700">
+                                <p class="text-sm font-gothic text-white">${item.course}: <span class="text-red-400">${item.name}</span></p>
+                                <p class="text-xs text-gray-400 mt-1">${item.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = communique + profileSection + menuSection + renderRosterSection(character.id);
+        }
+
+        function copyLink(id) {
+            const linkInput = document.getElementById(`link-${id}`);
+            linkInput.select();
+            document.execCommand('copy');
+            
+            const originalText = document.querySelector(`#link-${id} + button`).innerHTML;
+            document.querySelector(`#link-${id} + button`).innerHTML = 'Copied!';
+            setTimeout(() => {
+                document.querySelector(`#link-${id} + button`).innerHTML = originalText;
+            }, 1000);
+        }
+
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            const character = characterData.find(c => c.id === hash);
+
+            if (character) {
+                renderGuestPage(character);
+                document.title = `${character.name} - Eldoria Induction`;
+            } else {
+                renderLandingPage();
+                document.title = 'Host Portal - Eldoria Academy';
+            }
+        }
+
+        // Call immediately on load to handle the initial hash (or lack thereof)
+        handleHashChange();
+
+        // Listen for future hash changes (e.g., when a guest clicks the link)
+        window.onhashchange = handleHashChange;
+    </script>
+</body>
+</html>
